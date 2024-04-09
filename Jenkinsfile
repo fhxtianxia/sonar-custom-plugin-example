@@ -2,11 +2,27 @@ pipeline {
   agent any
   stages {
     stage('build') {
-      steps {
-        sh '''pwd
+      parallel {
+        stage('build') {
+          steps {
+            sh '''pwd
 ls'''
-        timeout(time: 1) {
-          echo 'test'
+            timeout(time: 1) {
+              echo 'test'
+            }
+
+          }
+        }
+
+        stage('') {
+          steps {
+            timestamps() {
+              sh 'echo 1111'
+              sleep 2
+              sh 'echo 222'
+            }
+
+          }
         }
 
       }
