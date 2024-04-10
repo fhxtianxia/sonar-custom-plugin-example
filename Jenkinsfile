@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  properties([[$class: 'JiraProjectProperty'], disableConcurrentBuilds(), parameters([string(defaultValue: '111', name: 'test', trim: true)]), pipelineTriggers([cron('0 2 * * *')])])
   stages {
     stage('build') {
       parallel {
